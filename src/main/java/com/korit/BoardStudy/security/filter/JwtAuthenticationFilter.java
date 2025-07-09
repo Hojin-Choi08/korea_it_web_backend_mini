@@ -31,12 +31,13 @@ public class JwtAuthenticationFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         List<String> methods = List.of("POST", "GET", "PUT", "PATCH", "DELETE");
-        if (methods.contains(request.getMethod())) {
+        if (!methods.contains(request.getMethod())) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
 
         String authorization = request.getHeader("Authorization");
+        System.out.println(authorization);
         if (jwtUtils.isBearer(authorization)) {
             String accessToken = jwtUtils.removeBearer(authorization);
 
@@ -53,8 +54,8 @@ public class JwtAuthenticationFilter implements Filter {
                             .email(user.getEmail())
                             .userRoles(user.getUserRoles())
                             .build();
-                    Authentication authentication = new UsernamePasswordAuthenticationToken
-                            (principalUser, "", principalUser.getAuthorities());
+
+                    Authentication authentication = new UsernamePasswordAuthenticationToken(principalUser, "", principalUser.getAuthorities());
                     SecurityContextHolder.getContext().setAuthentication(authentication);
 
                 }, () -> {

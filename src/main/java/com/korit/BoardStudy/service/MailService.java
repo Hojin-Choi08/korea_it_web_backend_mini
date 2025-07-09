@@ -96,4 +96,17 @@ public class MailService {
         }
         return resultMap;
     }
+
+
+    public ApiRespDto<?> testmail() {
+        System.out.println("들어옴");
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo("merro3043@gmail.com");
+        message.setSubject("test mail");
+        message.setText("test");
+
+        javaMailSender.send(message);
+
+        return new ApiRespDto<>("success", "보내짐", null);
+    }
 }

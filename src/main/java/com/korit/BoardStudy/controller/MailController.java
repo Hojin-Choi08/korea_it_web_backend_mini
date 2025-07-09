@@ -31,4 +31,6 @@ public class MailController {
         model.addAllAttributes(resultMap);
         return "result_page";
     }
+
+
 }

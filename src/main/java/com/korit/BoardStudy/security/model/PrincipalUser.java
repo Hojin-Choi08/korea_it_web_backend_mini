@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 @Data
 @Builder
 public class PrincipalUser implements UserDetails {
-
     private Integer userId;
     private String username;
     @JsonIgnore
@@ -25,7 +24,7 @@ public class PrincipalUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return userRoles.stream().map(userRole ->  new SimpleGrantedAuthority(userRole.getRole().getRoleName())
-        ).collect(Collectors.toList());
+        return userRoles.stream().map(userRole -> new SimpleGrantedAuthority(userRole.getRole().getRoleName()))
+                .collect(Collectors.toList());
     }
 }
