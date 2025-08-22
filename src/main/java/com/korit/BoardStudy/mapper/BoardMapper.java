@@ -11,4 +11,8 @@ public interface BoardMapper {
     int addBoard(Board board);
     Optional<Board> getBoardByBoardId(Integer boardId);
     List<Board> getBoardList();
+
+    int removeBoardByBoardId(Integer boardId);
+
+    int updateBoardByBoardId(Board board);
 }
