@@ -40,4 +40,8 @@ public class UserRepository {
         return userMapper.updatePassword(user);
     }
 
+    public int changeProfileImg(User user) {
+        return userMapper.updateProfileImg(user);
+    }
+
 }

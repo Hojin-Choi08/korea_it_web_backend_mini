@@ -9,7 +9,7 @@
         <result property="roleNameKor" column="role_name_kor" />
     </resultMap>
 
-    <resultMap id="UserRoleResultMap" type="com.korit.BoardStudy.entity.UserRole">
+    <resultMap id="UserRoleResultMap" type="com.konrit.BoardStudy.entity.UserRole">
         <id property="userRoleId" column="user_role_id" />
         <result property="userId" column="urt_user_id" />
         <result property="roleId" column="urt_role_id" />
@@ -23,6 +23,7 @@
         <result property="username" column="username"/>
         <result property="password" column="password" />
         <result property="email" column="email"/>
+        <result property="profileImg" column="profile_img" />
         <result property="createDt" column="create_dt" />
         <result property="updateDt" column="update_dt" />
         <collection property="userRoles" resultMap="UserRoleResultMap" />
@@ -31,7 +32,7 @@
     <insert id="addUser" useGeneratedKeys="true" keyProperty="userId">
         insert into
             user_tb
-        values(0, #{username}, #{password}, #{email}, now(), null)
+        values(0, #{username}, #{password}, #{email}, "https://firebasestorage.googleapis.com/v0/b/react-board-hojin.firebasestorage.app/o/profile.img%2Fprofile_img.jpg?alt=media&amp;token=46cf090d-c756-42d0-a8d3-b976ea7e230f", now(), null)
     </insert>
 
     <select id="getUserByUserId" resultMap="UserResultMap">
@@ -40,6 +41,7 @@
             ut.username,
             ut.password,
             ut.email,
+            ut.profile_img,
             ut.create_dt,
             ut.update_dt,
 
@@ -66,6 +68,7 @@
             ut.username,
             ut.password,
             ut.email,
+            ut.profile_img,
             ut.create_dt,
             ut.update_dt,
 
@@ -92,6 +95,7 @@
             ut.username,
             ut.password,
             ut.email,
+            ut.profile_img,
             ut.create_dt,
             ut.update_dt,
 
@@ -122,7 +126,14 @@
             user_id = #{userId}
     </update>
 
-
-
+    <update id="updateProfileImg">
+        update
+            user_tb
+        set
+            profile_img = #{profileImg},
+            update_dt = now()
+        where
+            user_id = #{userId}
+    </update>
 
 </mapper>
