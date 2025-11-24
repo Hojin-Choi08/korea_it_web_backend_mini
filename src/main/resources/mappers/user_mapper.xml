@@ -9,7 +9,7 @@
         <result property="roleNameKor" column="role_name_kor" />
     </resultMap>
 
-    <resultMap id="UserRoleResultMap" type="com.konrit.BoardStudy.entity.UserRole">
+    <resultMap id="UserRoleResultMap" type="com.korit.BoardStudy.entity.UserRole">
         <id property="userRoleId" column="user_role_id" />
         <result property="userId" column="urt_user_id" />
         <result property="roleId" column="urt_role_id" />
